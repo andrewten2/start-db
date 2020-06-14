@@ -4,10 +4,11 @@ import RandomPlanet from '../random-planet'
 import ErrorButton from '../error-button/error-button';
 import SwapiServices from '../../services/swapi-services';
 import ErrorIndicator from '../error-indicator';
-
+import Row from '../row'
 
 import './app.css'
 import PeoplePage from '../people-page/people-page';
+import ItemDetails from '../item-details/item-details';
 
 export default class App extends Component {  
 
@@ -47,6 +48,22 @@ export default class App extends Component {
     const clazzflag= this.state.butClass;
      clazzflag ? this.clazz='success' : this.clazz='warning';
 
+     const {getPerson,getStarship,getPersonImage,getStarshipImage} = this.swapiServices;
+
+     const PersonDetails = (
+       <ItemDetails itemId={5}
+                    getData={getPerson}
+                    getImageUrl={getPersonImage}/>
+     );
+
+
+     const starshipDetails = (
+      <ItemDetails itemId={5}
+                  getData={getStarship}
+                  getImageUrl={getStarshipImage}/>
+    );
+
+
     
 
         return(           
@@ -61,30 +78,8 @@ export default class App extends Component {
 
             <ErrorButton />
 
-            <PeoplePage />
+        <Row left={PersonDetails} right={starshipDetails}/>          
           
-          {/* <div className="row mt-2">
-            <div className="col">
-              <Itemlist 
-                onItemSelected = {this.onPersonSelected} 
-                getData ={this.swapiServices.getAllPlanets}
-                renderItem={({name,population})=>`${name}, ${population}`}/>
-                </div>
-            <div className="col"><PersonDetails /></div>     
-          </div>
-
-          <div className="row mt-2">
-            <div className="col">
-              <Itemlist 
-                onItemSelected = {this.onPersonSelected} 
-                getData ={this.swapiServices.getAllStarship}
-                renderItem={({model,length})=>`${model}, ${length}`}/>
-                </div>
-            <div className="col"><PersonDetails  /></div>     
-          </div> */}
-
-
-
           </div>
         );
     }

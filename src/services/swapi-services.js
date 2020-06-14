@@ -22,20 +22,7 @@ export default class SwapiServices {
       const person = await this.getResource(`/people/${id}/`);
       return this._transformPerson(person);
     };
-
-
-
-    _transformPerson = (person) => { 
-      
-      return {
-        id: this._extractId(person),
-        name: person.name,        
-        gender : person.gender,
-        birthYear: person.birth_year,
-        eyeColor: person.eye_color
-      }
-
-    }
+   
   
     getAllPlanets = async() => {
       const res = await this.getResource(`/planets/`);
@@ -49,16 +36,26 @@ export default class SwapiServices {
   
      getAllStarship = async () => {
       const res = await this.getResource(`/starships/`);
-      return res.results.map(this._transformStarship).slice(0,5);
+      return res.results.map(this._transformStarship);
     };
   
-     getStarship = async (id) => {
-      const starship =  this.getResource(`/starships/${id}/`);
+     getStarship = async(id) => {
+      const starship = await this.getResource(`/starships/${id}/`);
       return this._transformStarship(starship);
     }
 
 
-   
+    _transformPerson = (person) => { 
+      
+      return {
+        id: this._extractId(person),
+        name: person.name,        
+        gender : person.gender,
+        birthYear: person.birth_year,
+        eyeColor: person.eye_color
+      }
+
+    }
 
     _transformPlanet = (planet) => {     
 
@@ -78,12 +75,12 @@ export default class SwapiServices {
         id: this._extractId(starship),
         name: starship.name,
         model : starship.model,
-        manufacture : starship.manufacture,
-        costInCredits : starship.costInCredits,
+        manufacture : starship.manufacturer,
+        costInCredits : starship.cost_in_credits,
         length : starship.length,
         crew : starship.crew,
         passengers : starship.passengers,
-        cargoCapacity : starship.cargoCapacity        
+        cargoCapacity : starship.cargo_capacity        
       }
     }
 
@@ -95,15 +92,28 @@ export default class SwapiServices {
     }
 
 
-   
+   getPersonImage = (item) => {
+    console.log(item);
+     return `https://starwars-visualguide.com/assets/img/characters/${item.id}.jpg`
+   } 
+
+   getStarshipImage = ({id}) => {
+    console.log(`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`);
+    return `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`
+  } 
+
+  getPlanetImage = (item) => {
+    console.log(item);
+    return `https://starwars-visualguide.com/assets/img/planet/${item.id}.jpg`
+  } 
 
 }
 
-  
- 
-  
-  
+
+
   // const swapi = new SwapiServices();
+  // console.log(swapi.getStarshipImage(10));
+  // console.log(swapi.getPersonImage(10));
 
   // swapi.getAllPeople().then((body)=>{
   //   console.log(body);
@@ -117,7 +127,10 @@ export default class SwapiServices {
   // });
   
   
-  // swapi.getStarship(3).then(p=>{
-  //   console.log(p.name);
+  // swapi.getAllStarship().then(p=>{
+  //   console.log(p);
   // })
   
+  // swapi.getStarship(3).then(p=>{
+  //   console.log(p);
+  // })

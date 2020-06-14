@@ -3,7 +3,7 @@ import Itemlist from '../item-list'
 import PersonDetails from '../person-details'
 import SwapiServices from '../../services/swapi-services';
 import ErrorBoundry from '../error-boundry'
-
+import Row from '../row'
 export default class PeoplePage extends Component {
     
     swapiServices = new SwapiServices();
@@ -37,18 +37,6 @@ export default class PeoplePage extends Component {
           </ErrorBoundry>
         );
        
-             const Row =({left,right}) =>{
-               return (
-                 <div className="row mt-2 mb-2">
-                   <div className="col-md-6 mb-2">
-                     {left}
-                       </div>
-                   <div className="col-md-6">
-                     {right}
-                     </div>     
-                 </div>
-               );
-             }
         
         return(
             <div>               
