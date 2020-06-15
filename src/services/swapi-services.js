@@ -104,7 +104,7 @@ export default class SwapiServices {
 
   getPlanetImage = (item) => {
     console.log(item);
-    return `https://starwars-visualguide.com/assets/img/planet/${item.id}.jpg`
+    return `https://starwars-visualguide.com/assets/img/planets/${item.id}.jpg`
   } 
 
 }

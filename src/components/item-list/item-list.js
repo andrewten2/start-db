@@ -1,52 +1,22 @@
-import React,{Component} from 'react';
+import React from 'react';
 import './item-list.css';
-import Spinner from '../spinner';
 
 
-export default class Itemlist extends Component{   
+const  Itemlist =(props) => {   
 
-
-    state = {
-        itemList: null
-    };
-
-    componentDidMount() {
-
-        const {getData} = this.props;
-        
-        getData()
-        .then((itemList)=>{
-            this.setState({itemList})
-        });
-    };
-
-
-    renderItems(arr) {
-        
-       return arr.map((item) => {
-           const {id} = item;          
-           const label= this.props.children(item);
-                return (
-                <li key={id} 
-                className="list-group-item list-group-item-action d-flex "
-                onClick = {() =>this.props.onItemSelected(id)}>
-                {label}
-           </li>
+ 
+    const {data,onItemSelected,children: renderLabel}= props;
+    const items = data.map((item) => {
+        const {id} = item;          
+        const label= renderLabel(item);
+             return (
+             <li key={id} 
+             className="list-group-item list-group-item-action d-flex "
+             onClick = {() =>onItemSelected(id)}>
+             {label}
+             </li>
             );
-       });
-
-    }
-
-
-render() {   
-
-    const {itemList} = this.state;
-
-    if(!itemList){
-        return <Spinner />
-    }
-
-    const items = this.renderItems(itemList);
+    });
 
     return (
         <div className="item-list">
@@ -55,5 +25,8 @@ render() {
             </ul>            
         </div>
     );
-}
 };
+
+
+
+export default  Itemlist;

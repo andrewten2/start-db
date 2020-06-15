@@ -4,6 +4,7 @@ import './item-details.css';
 import SwapiServices from '../../services/swapi-services';
 import Spinner from '../spinner'
 import ErrorButton from '../error-button/error-button';
+import ErrorIndicator from '../error-indicator';
 
 
 const Record = ({item,field,label}) =>{
@@ -25,7 +26,8 @@ export default class ItemDetails extends Component {
   state ={
     item : null,
     loading : true,  
-    image : null 
+    image : null,
+    hasError: false
   };
 
   componentDidMount(){
@@ -40,6 +42,10 @@ export default class ItemDetails extends Component {
 
   }
 
+  componentDidCatch() {
+    console.log('oshibka lvl 1')
+    this.setState({ hasError: true });
+  }
 
 
   updateItem() {
@@ -65,7 +71,9 @@ export default class ItemDetails extends Component {
 
   render() {   
 
-   
+    if (this.state.hasError) {
+      return <ErrorIndicator />
+    }
 
     const {loading,item,image} = this.state;
  
