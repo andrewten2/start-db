@@ -9,7 +9,16 @@ import Row from '../row'
 import './app.css'
 import PeoplePage from '../people-page/people-page';
 import ItemDetails,{Record} from '../item-details/item-details';
+import Itemlist from '../item-list';
 
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from '../sw-components'
 export default class App extends Component {  
 
   swapiServices = new SwapiServices();
@@ -17,7 +26,8 @@ export default class App extends Component {
   state = {
     showRandomPlanet: true,
     butClass : true,
-    hasError: false
+    hasError: false,
+    selectedPerson :5
   };
 
 
@@ -35,6 +45,9 @@ export default class App extends Component {
     });
   };
   
+  onPersonSelected = (selectedPerson) => {
+    this.setState({ selectedPerson });
+  };
 
 
   render() {    
@@ -48,30 +61,61 @@ export default class App extends Component {
     const clazzflag= this.state.butClass;
      clazzflag ? this.clazz='success' : this.clazz='warning';
 
-     const {getPerson,getStarship,getPersonImage,getStarshipImage} = this.swapiServices;
+     const {getPerson,getStarship,getPersonImage,getStarshipImage,getAllStarship} = this.swapiServices;
 
-     const PersonDetails = (
-       <ItemDetails itemId={5}
-                    getData={getPerson}
-                    getImageUrl={getPersonImage}>
-              <Record field="gender" label="Gender"/>
-              <Record field="eyeColor" label="Eye Color"/>
-        </ItemDetails>
-     );
-
-
-     const starshipDetails = (
-      <ItemDetails itemId={5}
-                  getData={getStarship}
-                  getImageUrl={getStarshipImage}>
-              <Record field="model" label="Model"/>
-              <Record field="crew" label="Crew"/>    
-              <Record field="costInCredits" label="Cost"/>    
-      </ItemDetails>
-    );
+    //  const PersonDetails = (
+    //    <ItemDetails itemId={5}
+    //                 getData={getPerson}
+    //                 getImageUrl={getPersonImage}>
+    //           <Record field="gender" label="Gender"/>
+    //           <Record field="eyeColor" label="Eye Color"/>
+    //     </ItemDetails>
+    //  );
 
 
+     
+    // const ItemStarships = (
+    //   <StarshipList
+    //   getData={getAllStarship}
+    //   onItemSelected={this.onPersonSelected}>
+    //     { ({name}) => <span>{name}</span>}
+    //   </StarshipList>
+    // );
     
+    // const starshipDetails = (
+    //   <ItemDetails itemId={this.state.selectedPerson}
+    //               getData={getStarship}
+    //               getImageUrl={getStarshipImage}>
+    //           <Record field="model" label="Model"/>
+    //           <Record field="crew" label="Crew"/>    
+    //           <Record field="costInCredits" label="Cost"/>    
+    //   </ItemDetails>
+    // );
+
+
+    const demo =(
+      <div>
+        <PersonList>
+                {({name})=><span>{name}</span>}
+        </PersonList>
+         <PlanetList>
+                {({name})=><span>{name}</span>}
+        </PlanetList>
+         <StarshipList>
+         {({name})=><span>{name}</span>}
+        </StarshipList>
+      </div>
+      );
+
+
+      const demo2 = (
+        <div>
+          <PersonDetails itemId={11}/>
+          <PlanetDetails itemId={2}/>
+          <StarshipDetails itemId={9}/>
+        </div>
+      );
+
 
         return(           
           <div>  
@@ -84,9 +128,10 @@ export default class App extends Component {
             </button>
 
             <ErrorButton />
-
-        <Row left={PersonDetails} right={starshipDetails}/>          
-          
+            {/* <PeoplePage/> */}
+        {/* <Row left={ItemStarships} right={starshipDetails}/>           */}
+            {demo}
+            {demo2}
           </div>
         );
     }
