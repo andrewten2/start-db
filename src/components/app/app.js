@@ -8,7 +8,7 @@ import Row from '../row'
 
 import './app.css'
 import PeoplePage from '../people-page/people-page';
-import ItemDetails from '../item-details/item-details';
+import ItemDetails,{Record} from '../item-details/item-details';
 
 export default class App extends Component {  
 
@@ -53,14 +53,21 @@ export default class App extends Component {
      const PersonDetails = (
        <ItemDetails itemId={5}
                     getData={getPerson}
-                    getImageUrl={getPersonImage}/>
+                    getImageUrl={getPersonImage}>
+              <Record field="gender" label="Gender"/>
+              <Record field="eyeColor" label="Eye Color"/>
+        </ItemDetails>
      );
 
 
      const starshipDetails = (
       <ItemDetails itemId={5}
                   getData={getStarship}
-                  getImageUrl={getStarshipImage}/>
+                  getImageUrl={getStarshipImage}>
+              <Record field="model" label="Model"/>
+              <Record field="crew" label="Crew"/>    
+              <Record field="costInCredits" label="Cost"/>    
+      </ItemDetails>
     );
 
 
@@ -71,7 +78,7 @@ export default class App extends Component {
            <Header/>
            { planet }           
            <button
-            className={`error-button btn btn-${this.clazz} btn-lg`}
+            className={`error-button btn btn-${this.clazz} btn-md`}
             onClick={this.toggleRandomPlanet}>
               Toggle Random Planet
             </button>

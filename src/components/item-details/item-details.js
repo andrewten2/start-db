@@ -6,6 +6,18 @@ import Spinner from '../spinner'
 import ErrorButton from '../error-button/error-button';
 
 
+const Record = ({item,field,label}) =>{
+  console.log(item);
+return(
+  <li className="list-group-item">
+              <span className="term">{label}</span>
+              <span>{item[field]}</span>
+            </li>
+);
+}
+
+export {Record};
+
 export default class ItemDetails extends Component {
 
   swapiService = new SwapiServices();
@@ -53,18 +65,18 @@ export default class ItemDetails extends Component {
 
   render() {   
 
-    if(!this.state.item){
-      return <span>Some problems((((((</span>
-    }
+   
 
     const {loading,item,image} = this.state;
  
     const spinner = loading ? < Spinner /> : null;
     const hasData = !(loading);
 
-    const content = hasData ?  <PersonView item={item} image={image} itemId={this.props.itemId}/> : null;
+    const content = hasData ?  <PersonView item={item} object={this.props.children} image={image} itemId={this.props.itemId}/> : null;
 
-
+    if(!this.state.item){
+      return <span>Some problems((((((</span>
+    }
 
     return (
       <div className="person-details card">
@@ -76,9 +88,9 @@ export default class ItemDetails extends Component {
 
 }
 
-const PersonView = ({item,itemId,image}) => {
+const PersonView = ({item,itemId,image,object}) => {
 
-  const {id,name,gender,birthYear,eyeColor} = item;
+  const {id,name} = item;
   console.log(name,id,image);
   return(
     <React.Fragment>
@@ -89,18 +101,10 @@ const PersonView = ({item,itemId,image}) => {
         <div className="card-body">
   <h4>{name},{itemId}</h4>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              <span className="term"> Gender</span>
-              <span>{gender}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">birth Year</span>
-              <span>{birthYear}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Eye color</span>
-              <span>{eyeColor}</span>
-            </li>
+           { React.Children.map(object,(child, idx)=> {             
+              return React.cloneElement(child,{item});
+            })
+            }
           </ul>
           <ErrorButton/>
         </div>      
