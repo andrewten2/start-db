@@ -6,3 +6,11 @@ button{
 .error-indicator{
     text-align: center;  
 }
+
+.item-list{
+    margin: 10px 0;
+}
+
+.person-details.card {
+    margin: 10px 0;
+}

@@ -4,12 +4,10 @@ import RandomPlanet from '../random-planet'
 import ErrorButton from '../error-button/error-button';
 import SwapiServices from '../../services/swapi-services';
 import ErrorIndicator from '../error-indicator';
+import {SwapiServiceProvider} from '../swapi-service-context';
 import Row from '../row'
-
 import './app.css'
-import PeoplePage from '../people-page/people-page';
-import ItemDetails,{Record} from '../item-details/item-details';
-import Itemlist from '../item-list';
+
 
 import {
   PersonDetails,
@@ -95,14 +93,11 @@ export default class App extends Component {
 
     const demo =(
       <div>
-        <PersonList>
-                {({name})=><span>{name}</span>}
+        <PersonList>                
         </PersonList>
-         <PlanetList>
-                {({name})=><span>{name}</span>}
+         <PlanetList>                
         </PlanetList>
-         <StarshipList>
-         {({name})=><span>{name}</span>}
+         <StarshipList>         
         </StarshipList>
       </div>
       );
@@ -117,22 +112,24 @@ export default class App extends Component {
       );
 
 
-        return(           
-          <div>  
-           <Header/>
-           { planet }           
-           <button
-            className={`error-button btn btn-${this.clazz} btn-md`}
-            onClick={this.toggleRandomPlanet}>
-              Toggle Random Planet
-            </button>
+        return(      
+          <SwapiServiceProvider value = {this.swapiServices} >     
+            <div>  
+            <Header/>
+            { planet }           
+            <button
+              className={`error-button btn btn-${this.clazz} btn-md`}
+              onClick={this.toggleRandomPlanet}>
+                Toggle Random Planet
+              </button>
 
-            <ErrorButton />
-            {/* <PeoplePage/> */}
-        {/* <Row left={ItemStarships} right={starshipDetails}/>           */}
-            {/* {demo} */}
-            {demo2}
-          </div>
+              <ErrorButton />
+              {/* <PeoplePage/> */}
+              {/* <Row left={ItemStarships} right={starshipDetails}/>           */}
+              {demo}
+              {demo2}
+             </div>
+          </SwapiServiceProvider>
         );
     }
 }
