@@ -107,7 +107,7 @@ export default class App extends Component {
         <div>
           <PersonDetails itemId={11}/>
           <PlanetDetails itemId={2}/>
-          <StarshipDetails itemId={9}/>
+          <StarshipDetails itemId={5}/>
         </div>
       );
 
