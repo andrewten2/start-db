@@ -5,18 +5,13 @@ import ErrorButton from '../error-button/error-button';
 import SwapiServices from '../../services/swapi-services';
 import ErrorIndicator from '../error-indicator';
 import {SwapiServiceProvider} from '../swapi-service-context';
-import Row from '../row'
+import {PeoplePage,PlanetPage,StarshipPage} from '../pages/index';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+
 import './app.css'
+import { StarshipDetails } from '../sw-components';
 
 
-import {
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails,
-  PersonList,
-  PlanetList,
-  StarshipList
-} from '../sw-components'
 export default class App extends Component {  
 
   swapiServices = new SwapiServices();
@@ -43,13 +38,10 @@ export default class App extends Component {
     });
   };
   
-  onPersonSelected = (selectedPerson) => {
-    this.setState({ selectedPerson });
-  };
+
 
 
   render() {    
-
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
@@ -59,61 +51,10 @@ export default class App extends Component {
     const clazzflag= this.state.butClass;
      clazzflag ? this.clazz='success' : this.clazz='warning';
 
-     const {getPerson,getStarship,getPersonImage,getStarshipImage,getAllStarship} = this.swapiServices;
-
-    //  const PersonDetails = (
-    //    <ItemDetails itemId={5}
-    //                 getData={getPerson}
-    //                 getImageUrl={getPersonImage}>
-    //           <Record field="gender" label="Gender"/>
-    //           <Record field="eyeColor" label="Eye Color"/>
-    //     </ItemDetails>
-    //  );
-
-
-     
-    // const ItemStarships = (
-    //   <StarshipList
-    //   getData={getAllStarship}
-    //   onItemSelected={this.onPersonSelected}>
-    //     { ({name}) => <span>{name}</span>}
-    //   </StarshipList>
-    // );
-    
-    // const starshipDetails = (
-    //   <ItemDetails itemId={this.state.selectedPerson}
-    //               getData={getStarship}
-    //               getImageUrl={getStarshipImage}>
-    //           <Record field="model" label="Model"/>
-    //           <Record field="crew" label="Crew"/>    
-    //           <Record field="costInCredits" label="Cost"/>    
-    //   </ItemDetails>
-    // );
-
-
-    const demo =(
-      <div>
-        <PersonList>                
-        </PersonList>
-         <PlanetList>                
-        </PlanetList>
-         <StarshipList>         
-        </StarshipList>
-      </div>
-      );
-
-
-      const demo2 = (
-        <div>
-          <PersonDetails itemId={11}/>
-          <PlanetDetails itemId={2}/>
-          <StarshipDetails itemId={5}/>
-        </div>
-      );
-
 
         return(      
-          <SwapiServiceProvider value = {this.swapiServices} >     
+          <SwapiServiceProvider value = {this.swapiServices} >
+            <Router>     
             <div>  
             <Header/>
             { planet }           
@@ -122,13 +63,20 @@ export default class App extends Component {
               onClick={this.toggleRandomPlanet}>
                 Toggle Random Planet
               </button>
-
-              <ErrorButton />
-              {/* <PeoplePage/> */}
-              {/* <Row left={ItemStarships} right={starshipDetails}/>           */}
-              {demo}
-              {demo2}
+              <ErrorButton />  
+              <Route path ='/' exact render={()=> <h2> Welcome to StartDB </h2>} />
+              <Route path ='/people' exact render={()=> <h2> Welcome PeoplePage </h2>} />
+              <Route path ='/people' component={PeoplePage} />
+              <Route path ='/planets' component={PlanetPage} />
+              <Route path ='/starships' exact component={StarshipPage} />                            
+              <Route path ='/starships/:id' 
+                     render = {({match})=> {
+                       const {id} = match.params;
+                       console.log(match);
+                     return  <StarshipDetails itemId={id}/> 
+                     }}/>                            
              </div>
+             </Router>
           </SwapiServiceProvider>
         );
     }

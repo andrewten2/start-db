@@ -86,24 +86,20 @@ export default class SwapiServices {
 
     _extractId(item) {
       const idRegExp = /\/([0-9]*)\/$/;
-      // console.log(item.url.match(idRegExp)[1]);
       return item.url.match(idRegExp)[1];
       
     }
 
 
    getPersonImage = (item) => {
-    console.log(item);
      return `https://starwars-visualguide.com/assets/img/characters/${item.id}.jpg`
    } 
 
    getStarshipImage = ({id}) => {
-    console.log(`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`);
     return `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`
   } 
 
   getPlanetImage = (item) => {
-    console.log(item);
     return `https://starwars-visualguide.com/assets/img/planets/${item.id}.jpg`
   } 
 

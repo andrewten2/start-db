@@ -8,7 +8,6 @@ import ErrorIndicator from '../error-indicator';
 
 
 const Record = ({item,field,label}) =>{
-  console.log(item);
 return(
   <li className="list-group-item">
               <span className="term">{label}</span>
@@ -83,7 +82,7 @@ export default class ItemDetails extends Component {
     const content = hasData ?  <PersonView item={item} object={this.props.children} image={image} itemId={this.props.itemId}/> : null;
 
     if(!this.state.item){
-      return <span>Some problems((((((</span>
+      return <span className="text-center" >Select a item from a  right list </span>
     }
 
     return (
@@ -99,7 +98,6 @@ export default class ItemDetails extends Component {
 const PersonView = ({item,itemId,image,object}) => {
 
   const {id,name} = item;
-  console.log(name,id,image);
   return(
     <React.Fragment>
             

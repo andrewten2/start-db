@@ -8,8 +8,9 @@ const withData = (View) => {
     return class extends Component{
         
         state = {
-            itemList: null,
+            data: null,
             error: false
+            
         };
 
         componentDidMount() {    
@@ -31,11 +32,17 @@ const withData = (View) => {
         }
         
         render () {
-            const {data} = this.state;
+            const {data,error} = this.state;
 
-            if(!data){
+            // if(error){
+            //     return <ErrorIndicator />
+            // }
+
+            if(!data && !error) {
                 return <Spinner />
             } 
+            
+
 
             const content = (!this.state.error) ? <View {...this.props} data={data} />: <ErrorIndicator />;
         

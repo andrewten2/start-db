@@ -4,15 +4,16 @@
     justify-content: center;
 }
 
-.header a {
-    color:white;
+.header ul li a {
+    color: white;
     text-decoration: none;
+    padding: 8px 19px;
 }
 
 .header ul li{
     list-style: none;
     margin: 0;
-    padding: .5rem 1rem;
+    padding: .5rem 0rem;
     border-radius: 3px;
 }
 
