@@ -6,9 +6,12 @@
   }
   
   .person-details .person-image {
-    width: 30%;
-    height: 30%;
+    max-width: 100%;    
     border-radius: 10px;
+  }
+
+  .person-img{
+    width: 40%;
   }
   
   .person-details .list-group-item {

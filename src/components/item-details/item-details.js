@@ -10,7 +10,7 @@ import ErrorIndicator from '../error-indicator';
 const Record = ({item,field,label}) =>{
 return(
   <li className="list-group-item">
-              <span className="term">{label}</span>
+              <span className="term">{label} : </span>
               <span>{item[field]}</span>
             </li>
 );
@@ -97,12 +97,13 @@ export default class ItemDetails extends Component {
 
 const PersonView = ({item,itemId,image,object}) => {
 
-  const {id,name} = item;
+  const {name} = item;
   return(
     <React.Fragment>
-            
-        <img alt="person" className="person-image"
+        <div className="person-img">
+          <img alt="person" className="person-image"
           src={image} />
+        </div>
 
         <div className="card-body">
   <h4>{name},{itemId}</h4>

@@ -6,23 +6,31 @@ import SwapiServices from '../../services/swapi-services';
 import ErrorIndicator from '../error-indicator';
 import {SwapiServiceProvider} from '../swapi-service-context';
 import {PeoplePage,PlanetPage,StarshipPage} from '../pages/index';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
-
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import LoginPage from '../pages/login-page';
+import SecretPage from '../pages/secret-page';
 import './app.css'
 import { StarshipDetails } from '../sw-components';
 
 
 export default class App extends Component {  
 
-  swapiServices = new SwapiServices();
+  
 
   state = {
+    swapiServices: new SwapiServices(),
     showRandomPlanet: true,
     butClass : true,
     hasError: false,
-    selectedPerson :5
+    isLoggedIn: false    
   };
 
+
+  onLogin = () =>{
+    this.setState({
+      isLoggedIn: true
+    })
+  }
 
   componentDidCatch() {
     console.log('oshibka lvl 1')
@@ -42,6 +50,10 @@ export default class App extends Component {
 
 
   render() {    
+
+    const {swapiServices,isLoggedIn} = this.state;
+    
+
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
@@ -53,28 +65,44 @@ export default class App extends Component {
 
 
         return(      
-          <SwapiServiceProvider value = {this.swapiServices} >
-            <Router>     
+          <SwapiServiceProvider value = {swapiServices} >
+            <Router>  
             <div>  
             <Header/>
             { planet }           
-            <button
-              className={`error-button btn btn-${this.clazz} btn-md`}
-              onClick={this.toggleRandomPlanet}>
-                Toggle Random Planet
-              </button>
-              <ErrorButton />  
+            <div className='buttons text-center'>
+              <button
+                className={`error-button btn btn-${this.clazz} btn-md`}
+                onClick={this.toggleRandomPlanet}>
+                  Toggle Random Planet
+                </button>
+                <ErrorButton />
+            </div>
+              <Switch>     
               <Route path ='/' exact render={()=> <h2> Welcome to StartDB </h2>} />
-              <Route path ='/people' exact render={()=> <h2> Welcome PeoplePage </h2>} />
-              <Route path ='/people' component={PeoplePage} />
+              <Route path ='/people/:id?' component={PeoplePage} />
               <Route path ='/planets' component={PlanetPage} />
               <Route path ='/starships' exact component={StarshipPage} />                            
+              
               <Route path ='/starships/:id' 
-                     render = {({match})=> {
-                       const {id} = match.params;
+                  render = {({match})=> {
+                        const {id} = match.params;
                        console.log(match);
                      return  <StarshipDetails itemId={id}/> 
-                     }}/>                            
+                     }}/>   
+              <Route path ='/login'
+                    render= {()=>(<LoginPage 
+                                      isLoggedIn={isLoggedIn}
+                                      onLogin={this.onLogin} />                                        
+                    )} />    
+                    
+              <Route path ='/secret'
+                    render= {()=>(<SecretPage isLoggedIn={isLoggedIn}/>
+                    )} />  
+
+              <Route render={()=><h2>Page not found</h2>} />
+              </Switch>  
+             
              </div>
              </Router>
           </SwapiServiceProvider>

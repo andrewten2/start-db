@@ -13,7 +13,7 @@ const  Itemlist =(props) => {
              return (
              <li key={id} 
              className="list-group-item list-group-item-action d-flex "
-             onClick = {() =>onItemSelected(id)}>
+             onClick = {() => onItemSelected(id)}>
              {label}
              </li>
             );

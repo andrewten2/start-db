@@ -1,24 +1,27 @@
 .person-details {
-    display: flex;
-    
-    flex-direction: row;
-    padding: 1rem;
-  }
+  display: flex;
   
-  .person-details .person-image {
-    width: 30%;
-    height: 30%;
-    border-radius: 10px;
-  }
-  
-  .person-details .list-group-item {
-    padding: .25rem;
-  }
-  
-  .person-details .list-group-item .term{
-    margin-right: .5rem;
-  }
+  flex-direction: row;
+  padding: 1rem;
+}
 
-  .loadingio-spinner-double-ring-e2z9ql42rpg {
-    margin: 0 auto;
-  }
+.person-details .person-image {
+  max-width: 100%;    
+  border-radius: 10px;
+}
+
+.person-img{
+  width: 40%;
+}
+
+.person-details .list-group-item {
+  padding: .25rem;
+}
+
+.person-details .list-group-item .term{
+  margin-right: .5rem;
+}
+
+.loadingio-spinner-double-ring-e2z9ql42rpg {
+  margin: 0 auto;
+}

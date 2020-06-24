@@ -14,8 +14,8 @@ export default class SwapiServices {
     }
   
      getAllPeople = async() => {
-      const res = await this.getResource(`/people/`);
-      return res.results.map(this._transformPerson).slice(0,5);
+      const res = await this.getResource(`/people/`);      
+      return res.results.map(this._transformPerson).slice(0,8);
     };
   
      getPerson = async(id) => {
@@ -26,7 +26,8 @@ export default class SwapiServices {
   
     getAllPlanets = async() => {
       const res = await this.getResource(`/planets/`);
-      return res.results.map(this._transformPlanet).slice(0,5);
+      console.log(res.results);
+      return res.results.map(this._transformPlanet).slice(0,8);
     };
   
      getPlanet = async(id) => {
@@ -36,7 +37,7 @@ export default class SwapiServices {
   
      getAllStarship = async () => {
       const res = await this.getResource(`/starships/`);
-      return res.results.map(this._transformStarship).slice(0,5);
+      return res.results.map(this._transformStarship).slice(0,8);
     };
   
      getStarship = async(id) => {
@@ -52,7 +53,9 @@ export default class SwapiServices {
         name: person.name,        
         gender : person.gender,
         birthYear: person.birth_year,
-        eyeColor: person.eye_color
+        eyeColor: person.eye_color,
+        height: person.height,
+        hairColor:person.hair_color
       }
 
     }
@@ -64,7 +67,10 @@ export default class SwapiServices {
         name: planet.name,
         population: planet.population,
         diameter: planet.diameter,
-        rotationPeriod: planet.rotation_period        
+        rotationPeriod: planet.rotation_period,
+        orbitalPeriod: planet.orbital_period,
+        surfaceWater: planet.surface_water,
+        climate: planet.climate    
       }
     }
 

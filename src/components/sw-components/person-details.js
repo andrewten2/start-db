@@ -7,7 +7,9 @@ const PersonDetails = (props) =>{
     return (
       <ItemDetails {...props}>
                     <Record field="gender" label="Gender"/>
-                    <Record field="eyeColor" label="Eye Color"/>
+                    <Record field="birthYear" label="Birth Year"/>
+                    <Record field="height" label="Height"/>
+                    <Record field="hairColor" label="Hair Color"/>
                 </ItemDetails>
     );
 };

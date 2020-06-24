@@ -11,9 +11,11 @@ const Header = () => {
         <div className="header d-flex">
         <Link to ="/"><img className="logo" src={logo} alt="star-wars" /></Link>
         <ul className="d-flex">
-            <li> <Link to='/people'>People</Link></li>
-            <li> <Link to='/planets'>Planets</Link></li>
-            <li> <Link to='/starships'>Starships</Link></li>
+            <li> <Link to='/people/'>People</Link></li>
+            <li> <Link to='/planets/'>Planets</Link></li>
+            <li> <Link to='/starships/'>Starships</Link></li>
+            <li> <Link to='/login'>Login</Link></li>
+            <li> <Link to='/secret'>SecretPage</Link></li>
             
         </ul>
 

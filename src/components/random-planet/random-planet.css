@@ -1,19 +1,20 @@
 .random-planet {
     display: flex;
+    flex-wrap: wrap;
     padding: 1rem;
     justify-content: center;
     margin-bottom: 1rem;
+    position: relative;
   }
   
   .random-planet .planet-image {
-    width: 150px;
-    height: 150px;
+    max-width: 100%;   
     border-radius: 10px;
     margin-right: 1rem;
   }
   
   .random-planet .list-group {
-    margin: 1rem 0 0 1rem;
+    margin: 1px 8px 0px;
   }
   
   .random-planet .list-group-item {
@@ -22,6 +23,25 @@
   
   .random-planet .list-group-item .term {
     margin-right: .5rem;
+  }
+
+  .planet-name h3{
+    padding: 4px 14px;
+    font-style: italic;
+    font-size: 25px;
+    color: #ffffff;
+    background-color: #cf420d;
+    border-radius: 6px;
+  }
+
+  .random-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .random-img-block{
+    width: 17%;
   }
 
   .boom {

@@ -80,7 +80,7 @@ export default class RandomPlanet extends Component {
 
     const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? < Spinner /> : null;
-    const content = hasData ? <PlanetView planet = {planet}/> : null;
+    const content = hasData ? <PlanetView planet = {planet} /> : null;
 
   
     return (
@@ -95,31 +95,56 @@ export default class RandomPlanet extends Component {
   }
 }
 
-const PlanetView = ({planet}) => {
+const PlanetView = ({planet,}) => {
 
-  const{name,population,rotationPeriod,diameter,id} = planet;
+  const{name,population,rotationPeriod,diameter,id,orbitalPeriod,surfaceWater,climate} = planet;
 
   return(
-    <React.Fragment>
-              <img className="planet-image" alt="planet"
-             src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
-        <div>
-          <h4>{name}</h4>
+    <React.Fragment>   
+        <div className='random-img-block'>
+          <img className="planet-image" alt="planet"
+          src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
+        </div>
+        
+      <div className='planet-description'> 
+
+      <div className='planet-name text-center'>
+        <h3>{name}</h3>
+      </div>         
+        
+        <div className='d-flex text-center'>
+
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
-              <span className="term">Population</span>
+              <span className="term">Population :</span>
               <span>{population}</span>
             </li>
             <li className="list-group-item">
-              <span className="term">Rotation Period</span>
+              <span className="term">Rotation Period :</span>
               <span>{rotationPeriod}</span>
             </li>
             <li className="list-group-item">
-              <span className="term">Diameter</span>
+              <span className="term">Diameter :</span>
               <span>{diameter}</span>
             </li>
           </ul>
+
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item">
+              <span className="term">Orbital Period :</span>
+              <span>{orbitalPeriod}</span>
+            </li>
+            <li className="list-group-item">
+              <span className="term">Surface Water :</span>
+              <span>{surfaceWater}</span>
+            </li>             
+            <li className="list-group-item">
+              <span className="term">Climate :</span>
+              <span>{climate}</span>
+            </li>            
+          </ul>
         </div>
+      </div> 
     </React.Fragment>
     
   )
